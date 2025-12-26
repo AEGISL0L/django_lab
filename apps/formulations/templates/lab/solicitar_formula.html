@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4 mt-sm-5">
+  <h2 class="display-4 mb-3 mb-sm-4 fs-2 fs-sm-1">Sol·licita fórmula Magistral</h2>
+
+  <div class="card shadow-sm bg-white">
+    <div class="card-body p-4">
+      <form method="post" enctype="multipart/form-data" class="mt-3 mt-sm-4">
+        {% csrf_token %}
+
+        {# Errores no asociados a un campo #}
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="row mb-3 mb-sm-4">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="form-label" for="{{ form.petition_id.id_for_label }}">
+                {{ form.petition_id.label }}
+              </label>
+              {{ form.petition_id }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3 mb-sm-4">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="form-label" for="{{ form.nombre.id_for_label }}">
+                {{ form.nombre.label }}
+              </label>
+              {{ form.nombre }}
+              {% if form.nombre.errors %}
+                <div class="alert alert-danger mt-2">
+                  {% for error in form.nombre.errors %}{{ error }}{% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3 mb-sm-4">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="form-label" for="{{ form.descripcion.id_for_label }}">
+                {{ form.descripcion.label }}
+              </label>
+              {{ form.descripcion }}
+              {% if form.descripcion.errors %}
+                <div class="alert alert-danger mt-2">
+                  {% for error in form.descripcion.errors %}{{ error }}{% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3 mb-sm-4">
+          <div class="col-12 col-md-6 mb-3 mb-md-0">
+            <div class="form-group">
+              {# requiere_rele es booleano: mejor checkbox #}
+              <div class="form-check mt-4">
+                {{ form.requiere_rele }}
+                <label class="form-check-label" for="{{ form.requiere_rele.id_for_label }}">
+                  {{ form.requiere_rele.label }}
+                </label>
+              </div>
+              {% if form.requiere_rele.errors %}
+                <div class="alert alert-danger mt-2">
+                  {% for error in form.requiere_rele.errors %}{{ error }}{% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="{{ form.telefono_contacto.id_for_label }}">
+                {{ form.telefono_contacto.label }}
+              </label>
+              {{ form.telefono_contacto }}
+              {% if form.telefono_contacto.errors %}
+                <div class="alert alert-danger mt-2">
+                  {% for error in form.telefono_contacto.errors %}{{ error }}{% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3 mb-sm-4">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="form-label" for="{{ form.foto_receta.id_for_label }}">
+                {{ form.foto_receta.label }}
+              </label>
+              {{ form.foto_receta }}
+              {% if form.foto_receta.errors %}
+                <div class="alert alert-danger mt-2">
+                  {% for error in form.foto_receta.errors %}{{ error }}{% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4 mt-sm-5">
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary btn-lg w-100 w-sm-auto px-5">
+              Solicitar Fórmula
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
